@@ -1,13 +1,20 @@
-import { ChangeEvent, MouseEvent, useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 interface Props {
   items: string[];
   heading: string;
   onSelectItem: (item: string) => void;
   onAddItem: (newItem: string) => void;
+  onDeleteItem: (index: number) => void;
 }
 
-function ListGroup({ items, heading, onSelectItem, onAddItem }: Props) {
+function ListGroup({
+  items,
+  heading,
+  onSelectItem,
+  onAddItem,
+  onDeleteItem,
+}: Props) {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [inputValue, setInputValue] = useState("");
 
@@ -27,6 +34,9 @@ function ListGroup({ items, heading, onSelectItem, onAddItem }: Props) {
     }
   };
 
+  const handleDeleteItem = (index: number) => {
+    onDeleteItem(index);
+  };
   return (
     <>
       <h1>{heading}</h1>
@@ -53,6 +63,7 @@ function ListGroup({ items, heading, onSelectItem, onAddItem }: Props) {
             }}
           >
             {item}
+            <button onClick={() => handleDeleteItem(index)}>Delete</button>
           </li>
         ))}
       </ul>

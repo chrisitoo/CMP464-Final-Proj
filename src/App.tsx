@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ListGroup from "./components/ListGroup";
 
 function App() {
@@ -18,6 +18,10 @@ function App() {
     setToDos((prevToDos) => [...prevToDos, newItem]);
   };
 
+  const handleDeleteItem = (index: number) => {
+    setToDos((prevToDos) => prevToDos.filter((_, i) => i !== index));
+  };
+
   return (
     <div>
       <ListGroup
@@ -25,6 +29,7 @@ function App() {
         heading="Errands"
         onSelectItem={handleSelectItem}
         onAddItem={handleAddItem}
+        onDeleteItem={handleDeleteItem}
       />
     </div>
   );
