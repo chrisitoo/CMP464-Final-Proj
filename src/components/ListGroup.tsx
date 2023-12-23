@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from "react";
+import "./ListGroup.css";
 
 interface Props {
   items: string[];
@@ -47,15 +48,13 @@ function ListGroup({
         onKeyDown={handleInputKeyPress}
         placeholder="Add new item..."
       />
-      {items.length === 0 && <p> Add something to keep track of your day!</p>}
+      {items.length === 0 && (
+        <p className="empty-list"> Add something to keep track of your day!</p>
+      )}
       <ul className="list-group">
         {items.map((item, index) => (
           <li
-            className={
-              selectedIndex === index
-                ? "list-group-item active"
-                : "list-group-item"
-            }
+            className={`list-item ${selectedIndex === index ? "active" : ""}`}
             key={item}
             onClick={() => {
               setSelectedIndex(index);
@@ -63,7 +62,12 @@ function ListGroup({
             }}
           >
             {item}
-            <button onClick={() => handleDeleteItem(index)}>Delete</button>
+            <button
+              className="delete-button"
+              onClick={() => handleDeleteItem(index)}
+            >
+              Delete
+            </button>
           </li>
         ))}
       </ul>
